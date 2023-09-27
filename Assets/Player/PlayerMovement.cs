@@ -14,10 +14,15 @@ public class PlayerMovement : MonoBehaviour
     private InputAction myPlayerAttack;
 
     public GameObject myBullet;
+    private bool isShooting;
+
+    public float myFireRate;
+    private float myTimeToFire = 0.0f;
 
     private void Awake()
     {
         myPlayerControls = new PlayerInputs();
+        isShooting = false;
     }
 
     private void OnEnable()
@@ -25,14 +30,14 @@ public class PlayerMovement : MonoBehaviour
         myPlayerMove = myPlayerControls.Player.Move;
         myPlayerMove.Enable();
         myPlayerAttack = myPlayerControls.Player.Attack;
-        myPlayerAttack.started += Shoot;
+        myPlayerAttack.started += ctx => Shoot();
+        myPlayerAttack.canceled += ctx => NoShoot();
         myPlayerAttack.Enable();
     }
 
     private void OnDisable()
     {
         myPlayerMove.Disable();
-        myPlayerAttack.canceled -= Shoot;
         myPlayerAttack.Disable();
     }
 
@@ -41,6 +46,11 @@ public class PlayerMovement : MonoBehaviour
     {
         myMoveDirection = myPlayerMove.ReadValue<Vector2>();
 
+        if (isShooting && Time.time > myTimeToFire)
+        {
+            myTimeToFire = Time.time + myFireRate;
+            CreateBullet();
+        }
     }
 
     private void FixedUpdate()
@@ -48,7 +58,17 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(myMoveDirection.x * myMoveSpeed, myMoveDirection.y * myMoveSpeed);
     }
 
-    private void Shoot(InputAction.CallbackContext obj)
+    private void Shoot()
+    {
+        isShooting = true;
+    }
+
+    private void NoShoot()
+    {
+        isShooting = false;
+    }
+
+    private void CreateBullet()
     {
         Instantiate(myBullet, transform.position, Quaternion.identity);
     }
