@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CreateBullet()
     {
-        Instantiate(myBullet, transform.position, Quaternion.identity);
+        //Instantiate(myBullet, transform.position, Quaternion.identity);
+        ObjectPool.SpawnObject(myBullet, transform.position, Quaternion.identity);
     }
 }

@@ -9,18 +9,32 @@ public class BulletScript : MonoBehaviour
     public float myDuration;
     public float myDamage;
 
+    private Coroutine _returnToPoolTimerCorutine;
+
+
+    private void OnEnable()
+    {
+        _returnToPoolTimerCorutine = StartCoroutine(ReturnToPoolAfterTime());
+    }
+
+
     private void Update()
     {
         ShootBolt();
 
-        Destroy(gameObject, myDuration);
+        //if (Time.time > myDuration)
+        //{
+        //    //Destroy(gameObject, myDuration);
+        //    ObjectPool.ReturnObjectToPool(gameObject);
+        //}
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Rock")
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            ObjectPool.ReturnObjectToPool(gameObject);
         }
     }
 
@@ -30,5 +44,17 @@ public class BulletScript : MonoBehaviour
         v.x += mySpeed * Time.deltaTime;
 
         transform.position = v;
+    }
+
+    private IEnumerator ReturnToPoolAfterTime()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < myDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        ObjectPool.ReturnObjectToPool(gameObject);
     }
 }
