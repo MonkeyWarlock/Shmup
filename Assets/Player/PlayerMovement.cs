@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction myPlayerMove;
     private InputAction myPlayerAttack;
 
-    public GameObject myBullet;
+    [SerializeField] private GameObject myBullet;
     private bool isShooting;
 
     public float myFireRate;

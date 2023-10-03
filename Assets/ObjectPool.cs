@@ -61,7 +61,7 @@ public class ObjectPool : MonoBehaviour
     {
         string goName = obj.name.Substring(0, obj.name.Length - 7); //by taking off 7, we are removing the clone from the name of the passed in obj
 
-        PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == obj.name);
+        PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == goName);
 
         if (pool == null)
         {

@@ -18,7 +18,7 @@ public class BulletScript : MonoBehaviour
     }
 
 
-    private void Update()
+    private void FixedUpdate()
     {
         ShootBolt();
 
