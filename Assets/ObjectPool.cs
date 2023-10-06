@@ -11,16 +11,6 @@ public class ObjectPool : MonoBehaviour
     {
         PooledObjectInfo pool = ObjectPools.Find(p => p.LookupString == objectToSpawn.name);
 
-        //PooledObjectInfo pool = null;
-        //foreach (PooledObjectInfo p in ObjectPools)
-        //{
-        //    if (p.LookupString == objectToSpawn.name)
-        //    {
-        //        pool = p;
-        //        break;
-        //    }
-        //}
-
         // If the pool doesnt exist, create it
         if (pool == null)
         {
@@ -30,16 +20,6 @@ public class ObjectPool : MonoBehaviour
 
         // Check if there are any inactive objects in the pool
         GameObject spawnableObj = pool.InactiveObjects.FirstOrDefault();
-
-        //GameObject spawnableObj = null;
-        //foreach (GameObject obj in pool.InactiveObjects)
-        //{
-        //    if (obj != null)
-        //    {
-        //        spawnableObj = obj;
-        //        break;
-        //    }
-        //}
 
         if (spawnableObj == null)
         {
