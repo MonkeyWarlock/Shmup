@@ -13,3 +13,5 @@ Player holds only the ability to shoot and move, the rocks hold the random posit
 my inspiration for this was old game i made way back going by "Having Great Adventure", sadly its unavailable online but i used some old gifs of it in my application to futuregames.
 
 Unity version 2022.3.8f1
+
+- Mikael Said
