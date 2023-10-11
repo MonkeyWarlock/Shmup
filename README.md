@@ -14,4 +14,4 @@ my inspiration for this was old game i made way back going by "Having Great Adve
 
 Unity version 2022.3.8f1
 
-- Mikael Said
+by Mikael Said
