@@ -21,14 +21,9 @@ public class BulletScript : MonoBehaviour
     private void FixedUpdate()
     {
         ShootBolt();
-
-        //if (Time.time > myDuration)
-        //{
-        //    //Destroy(gameObject, myDuration);
-        //    ObjectPool.ReturnObjectToPool(gameObject);
-        //}
     }
 
+    //On collision deactivate bullet
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Rock")
@@ -46,6 +41,7 @@ public class BulletScript : MonoBehaviour
         transform.position = v;
     }
 
+    //return the bullet to the pool
     private IEnumerator ReturnToPoolAfterTime()
     {
         float elapsedTime = 0f;

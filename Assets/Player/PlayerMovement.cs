@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float myFireRate;
     private float myTimeToFire = 0.0f;
-
+    public float myCurrentLevel;
     private void Awake()
     {
         myPlayerControls = new PlayerInputs();
@@ -27,8 +27,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        //sets the movement input
         myPlayerMove = myPlayerControls.Player.Move;
         myPlayerMove.Enable();
+
+        //sets the attack input
         myPlayerAttack = myPlayerControls.Player.Attack;
         myPlayerAttack.started += ctx => Shoot();
         myPlayerAttack.canceled += ctx => NoShoot();
@@ -48,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isShooting && Time.time > myTimeToFire)
         {
-            myTimeToFire = Time.time + myFireRate;
+            myTimeToFire = Time.time + (myFireRate / myCurrentLevel);
             CreateBullet();
         }
     }
@@ -68,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         isShooting = false;
     }
 
+    //Adds bullet object to pool
     private void CreateBullet()
     {
         //Instantiate(myBullet, transform.position, Quaternion.identity);

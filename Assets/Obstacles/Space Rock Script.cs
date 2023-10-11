@@ -8,7 +8,7 @@ public class SpaceRockScript : MonoBehaviour
 
     private void Update()
     {
-        if (myHealth == 0)
+        if (myHealth <= 0)
         {
             Destroy(gameObject);
         }
